@@ -1,23 +1,62 @@
-//! By convention, root.zig is the root source file when making a library.
 const std = @import("std");
+const zigx_nuhu_dev = @import("zigx_nuhu_dev");
 
-pub fn bufferedPrint() !void {
-    // Stdout is for the actual output of your application, for example if you
-    // are implementing gzip, then only the compressed bytes should be sent to
-    // stdout, not any debugging messages.
-    var stdout_buffer: [1024]u8 = undefined;
-    var stdout_writer = std.fs.File.stdout().writer(&stdout_buffer);
-    const stdout = &stdout_writer.interface;
+const HASHNODE_GQL_URL = "https://gql.hashnode.com";
+const HASHNODE_API_KEY = "YOUR_HASHNODE_API_KEY";
 
-    try stdout.print("Run `zig build test` to run the tests.\n", .{});
+pub fn getPosts(allocator: std.mem.Allocator) !HashnodeResponse {
+    var client = std.http.Client{ .allocator = allocator };
+    const get_posts_query = @embedFile("queries/get_posts.gql");
+    defer client.deinit();
 
-    try stdout.flush(); // Don't forget to flush!
+    var aw = std.Io.Writer.Allocating.init(allocator);
+
+    _ = try client.fetch(.{
+        .method = .POST,
+        .location = .{ .url = HASHNODE_GQL_URL },
+        .headers = std.http.Client.Request.Headers{
+            .authorization = .{ .override = HASHNODE_API_KEY },
+            .content_type = .{ .override = "application/json" },
+        },
+        .payload = try std.json.Stringify.valueAlloc(allocator, .{
+            .query = get_posts_query,
+        }, .{}),
+
+        .response_writer = &aw.writer,
+    });
+
+    const parsed = try std.json.parseFromSlice(HashnodeResponse, allocator, aw.written(), .{});
+    const parsed_value: HashnodeResponse = parsed.value;
+
+    return parsed_value;
 }
 
-pub fn add(a: i32, b: i32) i32 {
-    return a + b;
-}
-
-test "basic add functionality" {
-    try std.testing.expect(add(3, 7) == 10);
-}
+pub const HashnodeResponse = struct {
+    data: struct {
+        publication: struct {
+            isTeam: bool,
+            title: []const u8,
+            posts: struct {
+                edges: []struct {
+                    node: struct {
+                        id: []const u8,
+                        coverImage: ?struct {
+                            url: []const u8,
+                        },
+                        publishedAt: []const u8,
+                        readTimeInMinutes: u32,
+                        slug: []const u8,
+                        subtitle: ?[]const u8,
+                        views: u32,
+                        title: []const u8,
+                        brief: []const u8,
+                        url: []const u8,
+                        author: struct {
+                            name: []const u8,
+                        },
+                    },
+                },
+            },
+        },
+    },
+};

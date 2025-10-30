@@ -1,0 +1,12 @@
+pub fn Page(allocator: zx.Allocator) zx.Component {
+    return (
+        <main>
+            <img alt="Nurul Huda (Apon)" width="280" fetchpriority="high" src="https://nurulhudaapon.com/nurulhudaapon.webp" />
+            <h1>Nurul Huda (Apon)</h1>
+            <p>Staff Engineer at Voyage Mobile Inc.</p>
+            <p>A tech enthusiast, enrolling in Computer Science and Engineering at Green University of Bangladesh and working as a Staff Engineer</p>
+        </main>
+    );
+}
+
+const zx = @import("zx");
