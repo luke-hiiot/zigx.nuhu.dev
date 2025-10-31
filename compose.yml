@@ -1,6 +1,8 @@
 services:
   zigx_nuhu_dev:
-    image: zigx_nuhu_dev:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: "zigx.nuhu.dev"
     restart: unless-stopped
     networks:
