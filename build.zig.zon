@@ -32,9 +32,9 @@
     // Once all dependencies are fetched, `zig build` no longer requires
     // internet connectivity.
     .dependencies = .{
-        .zigx_prototype = .{
-            .url = "git+https://github.com/nurulhudaapon/zigx-prototype#19febcc83d2e7207d8f6900490b86a29b4e19f13",
-            .hash = "zigx_prototype-0.0.0-MCGw0o99AQDnAuTLmHNPLU95EjoxegnuURmuK3vfkd7h",
+        .zigx = .{
+            .url = "git+https://github.com/nurulhudaapon/zigx#592c8a03f3952ebbe2b2003aa72732ed33d63392",
+            .hash = "zigx-0.0.0-w-j9orXUAQAACnLLrY7XYOecN751YLau57UST_oe2_TM",
         },
     },
     .paths = .{

@@ -1,5 +1,5 @@
 const std = @import("std");
-const zigx = @import("zigx_prototype");
+const zigx = @import("zigx");
 
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
@@ -10,7 +10,7 @@ pub fn build(b: *std.Build) void {
         .target = target,
     });
 
-    // const zigx_dep = b.dependency("zigx_prototype", .{ .target = target, .optimize = optimize });
+    // const zigx_dep = b.dependency("zigx", .{ .target = target, .optimize = optimize });
     zigx.setup(b, .{
         .name = "www_zigx_nuhu_dev",
         .root_module = b.createModule(.{
