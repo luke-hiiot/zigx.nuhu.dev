@@ -1,20 +1,20 @@
 pub const routes = [_]zx.App.Meta.Route{
     .{
         .path = "/",
-        .page = @import("./.zigx/page.zig").Page,
-        .layout = @import("./.zigx/layout.zig").Layout,
+        .page = @import("./.zigx/pages/page.zig").Page,
+        .layout = @import("./.zigx/pages/layout.zig").Layout,
         .routes = &.{
             .{
                 .path = "/about",
-                .page = @import("./.zigx/about/page.zig").Page,
+                .page = @import("./.zigx/pages/about/page.zig").Page,
             },
             .{
                 .path = "/time",
-                .page = @import("./.zigx/time/page.zig").Page,
+                .page = @import("./.zigx/pages/time/page.zig").Page,
             },
             .{
                 .path = "/blog",
-                .page = @import("./.zigx/blog/page.zig").Page,
+                .page = @import("./.zigx/pages/blog/page.zig").Page,
             },
         },
     },

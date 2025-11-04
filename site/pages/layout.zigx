@@ -45,5 +45,5 @@ const zx = @import("zx");
 const Navbar = @import("component.zig").Navbar;
 const NavbarProps = @import("component.zig").NavbarProps;
 
-const CSS_STYLES = @embedFile("style.css");
+const CSS_STYLES = @embedFile("../assets/style.css");
 

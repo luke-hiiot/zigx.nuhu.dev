@@ -1,22 +1,21 @@
 pub fn Page(allocator: zx.Allocator) zx.Component {
-    const posts = zigx_nuhu_dev.getPosts(allocator) catch |err| {
-        std.debug.print("Error fetching posts: {any}\n", .{err});
 
-        return (<p>Error fetching posts. Please try again later.</p>);
+    const posts = zigx_nuhu_dev.getPosts(allocator) catch |err| {
+        return (<p>Error fetching posts. Please try again later. {[err:any]}</p>);
     };
 
     return (
         <main>
             <h1>Blog</h1>
             <ol>
-            {for (posts) |post| {
-                (<li>
+            {for (posts) |post| {(
+                <li>
                     <div>
                         <a href={post.url}><h3>{post.title}</h3></a>
                         <p>{post.brief}</p>
                     </div>
-                </li>)
-            }}
+                </li>
+            )}}
             </ol>
         </main>
     );
@@ -24,4 +23,3 @@ pub fn Page(allocator: zx.Allocator) zx.Component {
 
 const zx = @import("zx");
 const zigx_nuhu_dev = @import("zigx_nuhu_dev");
-const std = @import("std");
