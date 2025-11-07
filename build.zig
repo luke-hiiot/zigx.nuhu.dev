@@ -38,7 +38,21 @@ pub fn build(b: *std.Build) void {
 
     b.installArtifact(exe);
 
+    // Add image optimization step
+    const optimize_images_step = b.step("optimize-images", "Optimize images in the project");
+    
+    // Create a custom build step for image optimization
+    const optimize_images_cmd = b.addSystemCommand(&[_][]const u8{
+        "zig", "run", "tools/optimize_images.zig",
+    });
+    optimize_images_step.dependOn(&optimize_images_cmd.step);
+
+    // Run image optimization before the main build
+    const assets_step = b.step("assets", "Process assets including images");
+    assets_step.dependOn(optimize_images_step);
+
     const run_step = b.step("run", "Run the app");
+    run_step.dependOn(assets_step);
 
     const run_cmd = b.addRunArtifact(exe);
     run_step.dependOn(&run_cmd.step);

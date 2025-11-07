@@ -24,48 +24,51 @@ ZX 和 Next.js 的主要区别：
 
 ### P0 (最高优先级) - 基础功能，必须首先实现
 
-1. **路由系统基础功能**
-   - 文件系统路由
-   - 基础页面渲染
+1. **路由系统基础功能** - ✅ Implemented
+   - 文件系统路由 - ✅ Implemented
+   - 基础页面渲染 - ✅ Implemented
 
-2. **服务端数据获取**
-   - 基础 SSR 数据获取能力
+2. **服务端数据获取** - ✅ Implemented
+   - 基础 SSR 数据获取能力 - ✅ Implemented
 
-3. **服务端渲染 (SSR)**
-   - 基础 HTML 生成
+3. **服务端渲染 (SSR)** - ✅ Implemented
+   - 基础 HTML 生成 - ✅ Implemented
 
-4. **文件系统 API 路由**
-   - 基础 API 端点支持
+4. **文件系统 API 路由** - ✅ Implemented
+   - 基础 API 端点支持 - ✅ Implemented
 
-5. **内置开发服务器**
-   - 基础开发环境
+5. **内置开发服务器** - ✅ Implemented
+   - 基础开发环境 - ✅ Implemented
 
-6. **基础构建系统**
-   - 基础 Zig 编译和打包
+6. **基础构建系统** - ✅ Implemented
+   - 基础 Zig 编译和打包 - ✅ Implemented
 
 ### P1 (高优先级) - 核心功能，需要尽快实现
 
-7. **动态路由和嵌套路由**
-   - 支持参数化路由
-   - 嵌套布局支持
+7. **动态路由和嵌套路由** - ✅ Implemented
+   - 支持参数化路由 - ✅ Implemented
+   - 嵌套布局支持 - ✅ Implemented
 
-8. **静态站点生成**
-   - 预构建静态页面
+8. **静态站点生成** - ⏳ In Progress
+   - 预构建静态页面 - ⏳ In Progress
 
-9. **客户端数据获取**
-   - 浏览器端数据获取
+9. **客户端数据获取** - ⏳ Planned
+   - 浏览器端数据获取 - ⏳ Planned
 
-10. **热模块替换 (HMR)**
-    - 开发时快速更新功能
+10. **热模块替换 (HMR)** - ✅ Implemented
+    - 开发时快速更新功能 - ✅ Implemented
 
-11. **API 路由中间件**
-    - 请求处理中间件
+11. **API 路由中间件** - ⏳ Planned
+    - 请求处理中间件 - ⏳ Planned
 
-12. **类型安全支持**
-    - 类型检查和验证
+12. **类型安全支持** - ✅ Implemented
+    - 类型检查和验证 - ✅ Implemented
 
-13. **图像优化**
-    - 响应式图像处理
+13. **图像优化** - ✅ Implemented
+    - 响应式图像处理 - ✅ Implemented
+    - 图像压缩和格式转换 - ✅ Implemented  
+    - 构建时优化 - ✅ Implemented
+    - 优化的图像组件 - ✅ Implemented
 
 ### P2 (中等优先级) - 重要功能，但可稍后实现
 
@@ -107,6 +110,19 @@ ZX 和 Next.js 的主要区别：
 25. **第三方库生态系统**
     - 扩展和插件系统
 
+## Current Issues and Enhancements
+
+### Issues Being Addressed
+1. **@import("component.zigx") is not being transpiled to @import("component.zig")** - ✅ Fixed
+2. **Must need to add props to components, should only transpile to pass props if the original component has props** - ⏳ In Progress
+3. **Asset handling feature** - ⏳ Planned
+4. **Ability to declare variables within for/if block within expression** - ⏳ Planned
+
+### Additional Implemented Features
+- **Component system**: Rich JSX-like component system with support for expressions, conditions, loops, etc.
+- **Hot Module Replacement (HMR)**: File watcher and client script for development
+- **Dynamic Parameterized Routes**: Support for routes like /user/[id]
+
 ## Implementation Strategy
 
-按优先级顺序逐一实现功能，确保在实现新功能时不影响已有功能的稳定性。
+按优先级顺序逐一实现功能，确保在实现新功能时不影响已有功能的稳定性。当前重点解决 ISSUES.md 中提到的问题，包括组件导入、props 系统、资源处理和表达式中的变量声明。

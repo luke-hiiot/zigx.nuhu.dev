@@ -1,0 +1,25 @@
+pub fn Page(allocator: zx.Allocator, _: ?[]const zx.Param, _: ?[]const u8) zx.Component {
+
+    const posts = zigx_nuhu_dev.getPosts(allocator) catch |err| {
+        return (<p>Error fetching posts. Please try again later. {[err:any]}</p>);
+    };
+
+    return (
+        <main>
+            <h1>Blog</h1>
+            <ol>
+            {for (posts) |post| {(
+                <li>
+                    <div>
+                        <a href={post.url}><h3>{post.title}</h3></a>
+                        <p>{post.brief}</p>
+                    </div>
+                </li>
+            )}}
+            </ol>
+        </main>
+    );
+}
+
+const zx = @import("zx");
+const zigx_nuhu_dev = @import("zigx_nuhu_dev");
