@@ -1,0 +1,15 @@
+{
+  "name": "zigx.nuhu.dev",
+  "version": "1.0.0",
+  "description": "ZX-based website for Nurul Huda (Apon)",
+  "main": "index.js",
+  "scripts": {
+    "build:tailwind": "npx @tailwindcss/cli -i site/assets/input.css -o site/assets/style.css",
+    "build:tailwind:prod": "npx @tailwindcss/cli -i site/assets/input.css -o site/assets/style.css --minify",
+    "watch:tailwind": "npx @tailwindcss/cli -i site/assets/input.css -o site/assets/style.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.0.0",
+    "@tailwindcss/cli": "^4.0.0"
+  }
+}

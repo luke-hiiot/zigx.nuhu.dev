@@ -1,4 +1,4 @@
-pub fn Page(allocator: zx.Allocator) zx.Component {
+pub fn Page(allocator: zx.Allocator, _: ?[]const zx.Param, _: ?[]const u8) zx.Component {
     const time = std.time.timestamp();
 
     return (

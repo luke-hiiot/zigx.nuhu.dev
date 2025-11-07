@@ -1,0 +1,31 @@
+pub fn Page(allocator: zx.Allocator, params: ?[]const zx.Param, data: ?[]const u8) zx.Component {
+    const _zx = zx.init(allocator);
+    
+    const user_id = if (params) |p| blk: {
+        for (p) |param| {
+            if (std.mem.eql(u8, param.name, "id")) {
+                break :blk param.value;
+            }
+        }
+        break :blk "unknown";
+    } else "unknown";
+    
+    // 使用_fmt来格式化用户ID
+    const user_id_text = std.fmt.allocPrint(allocator, "User ID: {s}", .{user_id}) catch "User ID: unknown";
+    
+    var data_text: []const u8 = "";
+    if (data) |d| {
+        data_text = std.fmt.allocPrint(allocator, "Data: {s}", .{d}) catch "";
+    }
+    
+    return _zx.zx(.div, .{
+        .children = &.{
+            _zx.zx(.h1, .{ .children = &.{ _zx.txt("User Profile") } }),
+            _zx.zx(.p, .{ .children = &.{ _zx.txt(user_id_text) } }),
+            _zx.txt(data_text),
+        },
+    });
+}
+
+const zx = @import("zx");
+const std = @import("std");

@@ -1,3 +1,6 @@
+const zx = @import("zx");
+
+// 定义路由配置
 pub const routes = [_]zx.App.Meta.Route{
     .{
         .path = "/",
@@ -16,6 +19,10 @@ pub const routes = [_]zx.App.Meta.Route{
                 .path = "/blog",
                 .page = @import("./.zx/pages/blog/page.zig").Page,
             },
+            .{
+                .path = "/user/[id]",
+                .page = @import("./.zx/pages/user/[id].zig").Page,
+            },
         },
     },
 };
@@ -23,5 +30,3 @@ pub const routes = [_]zx.App.Meta.Route{
 pub const meta = zx.App.Meta{
     .routes = &routes,
 };
-
-const zx = @import("zx");
