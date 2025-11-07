@@ -18,6 +18,7 @@ pub fn Page(allocator: zx.Allocator, params: ?[]const zx.Param, data: ?[]const u
     
     return (
         <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <span> welcome china</span>
             <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-8">
                 <div class="text-center mb-8">
                     <h1 class="text-3xl font-bold text-gray-900 mb-2">User Profile</h1>
